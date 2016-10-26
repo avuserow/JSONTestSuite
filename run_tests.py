@@ -103,6 +103,11 @@ programs = {
            "url":"",
            "commands":["/usr/bin/env", "perl6", os.path.join(PARSERS_DIR, "test_json_tiny.p6")]
        },
+   "Perl6 JSON::Fast":
+       {
+           "url":"",
+           "commands":["/usr/bin/env", "perl6", os.path.join(PARSERS_DIR, "test_json_fast.p6")]
+       },
 
 #   "PHP 5.5.36":
 #       {
