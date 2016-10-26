@@ -7,7 +7,8 @@ import sys
 from os import listdir
 from time import strftime
 
-BASE_DIR = "/Users/nst/Projects/JSONTestSuite/"
+#BASE_DIR = "/Users/nst/Projects/JSONTestSuite/"
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 PARSERS_DIR = os.path.join(BASE_DIR, "parsers")
 TEST_CASES_DIR_PATH = os.path.join(BASE_DIR, "test_parsing")
 LOGS_DIR_PATH = os.path.join(BASE_DIR, "results")
@@ -16,177 +17,183 @@ LOG_FILENAME = "logs.txt"
 LOG_FILE_PATH = os.path.join(LOGS_DIR_PATH, LOG_FILENAME)
 
 programs = {
-    "Bash JSON.sh 2016-08-12":
-        {
-            "url":"https://github.com/dominictarr/JSON.sh",
-            "commands":[os.path.join(PARSERS_DIR, "test_Bash_JSON/JSON.sh")],
-            "use_stdin":True
-        },
-    "R rjson":
-        {
-            "url":"",
-            "commands":["/usr/local/bin/RScript", os.path.join(PARSERS_DIR, "test_rjson.r")]
-        },
-    "R jsonlite":
-        {
-            "url":"",
-            "commands":["/usr/local/bin/RScript", os.path.join(PARSERS_DIR, "test_jsonlite.r")]
-        },
-   "Obj-C JSONKit":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_JSONKit/bin/test-JSONKit")]
-       },
-   "Obj-C Apple NSJSONSerialization":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_ObjCNSJSONSerializer/bin/test_ObjCNSJSONSerializer")]
-       },
-   "Obj-C TouchJSON":
-       {
-           "url":"https://github.com/TouchCode/TouchJSON",
-           "commands":[os.path.join(PARSERS_DIR, "test_TouchJSON/bin/test_TouchJSON")]
-       },
-   "Obj-C SBJSON 4.0.3":
-       {
-           "url":"https://github.com/stig/json-framework",
-           "commands":[os.path.join(PARSERS_DIR, "test_sbjson/bin/test_sbjson")]
-       },
-   "Go 1.7.1":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_go/test_json")]
-       },
-   "Lua JSON 20160916.19":
-       {
-           "url":"http://regex.info/blog/lua/json",
-           "commands":["/usr/local/bin/lua", os.path.join(PARSERS_DIR, "test_Lua_JSON/test_JSON.lua")]
-       },
-   "Lua dkjson":
-       {
-           "url":"http://dkolf.de/src/dkjson-lua.fsl/home",
-           "commands":["/usr/local/bin/lua", os.path.join(PARSERS_DIR, "test_dkjson.lua")]
-       },
-   "Ruby":
-       {
-           "url":"",
-           "commands":["/usr/bin/ruby", os.path.join(PARSERS_DIR, "test_json.rb")]
-       },
-   "Ruby regex":
-       {
-           "url":"",
-           "commands":["/usr/bin/ruby", os.path.join(PARSERS_DIR, "test_json_re.rb")]
-       },
-   "JavaScript":
-       {
-           "url":"",
-           "commands":["/usr/local/bin/node", os.path.join(PARSERS_DIR, "test_json.js")]
-       },
-   "Python 2.7.10":
-       {
-           "url":"",
-           "commands":["/usr/bin/python", os.path.join(PARSERS_DIR, "test_json.py")]
-       },
+#    "Bash JSON.sh 2016-08-12":
+#        {
+#            "url":"https://github.com/dominictarr/JSON.sh",
+#            "commands":[os.path.join(PARSERS_DIR, "test_Bash_JSON/JSON.sh")],
+#            "use_stdin":True
+#        },
+#    "R rjson":
+#        {
+#            "url":"",
+#            "commands":["/usr/local/bin/RScript", os.path.join(PARSERS_DIR, "test_rjson.r")]
+#        },
+#    "R jsonlite":
+#        {
+#            "url":"",
+#            "commands":["/usr/local/bin/RScript", os.path.join(PARSERS_DIR, "test_jsonlite.r")]
+#        },
+#   "Obj-C JSONKit":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_JSONKit/bin/test-JSONKit")]
+#       },
+#   "Obj-C Apple NSJSONSerialization":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_ObjCNSJSONSerializer/bin/test_ObjCNSJSONSerializer")]
+#       },
+#   "Obj-C TouchJSON":
+#       {
+#           "url":"https://github.com/TouchCode/TouchJSON",
+#           "commands":[os.path.join(PARSERS_DIR, "test_TouchJSON/bin/test_TouchJSON")]
+#       },
+#   "Obj-C SBJSON 4.0.3":
+#       {
+#           "url":"https://github.com/stig/json-framework",
+#           "commands":[os.path.join(PARSERS_DIR, "test_sbjson/bin/test_sbjson")]
+#       },
+#   "Go 1.7.1":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_go/test_json")]
+#       },
+#   "Lua JSON 20160916.19":
+#       {
+#           "url":"http://regex.info/blog/lua/json",
+#           "commands":["/usr/local/bin/lua", os.path.join(PARSERS_DIR, "test_Lua_JSON/test_JSON.lua")]
+#       },
+#   "Lua dkjson":
+#       {
+#           "url":"http://dkolf.de/src/dkjson-lua.fsl/home",
+#           "commands":["/usr/local/bin/lua", os.path.join(PARSERS_DIR, "test_dkjson.lua")]
+#       },
+#   "Ruby":
+#       {
+#           "url":"",
+#           "commands":["/usr/bin/ruby", os.path.join(PARSERS_DIR, "test_json.rb")]
+#       },
+#   "Ruby regex":
+#       {
+#           "url":"",
+#           "commands":["/usr/bin/ruby", os.path.join(PARSERS_DIR, "test_json_re.rb")]
+#       },
+#   "JavaScript":
+#       {
+#           "url":"",
+#           "commands":["/usr/local/bin/node", os.path.join(PARSERS_DIR, "test_json.js")]
+#       },
+#   "Python 2.7.10":
+#       {
+#           "url":"",
+#           "commands":["/usr/bin/python", os.path.join(PARSERS_DIR, "test_json.py")]
+#       },
    "Perl JSON":
        {
            "url":"",
-           "commands":["/usr/bin/perl", os.path.join(PARSERS_DIR, "test_json.pl")]
+           "commands":["/usr/bin/env", "perl", os.path.join(PARSERS_DIR, "test_json.pl")]
        },
    "Perl JSON::XS":
        {
            "url":"http://search.cpan.org/dist/JSON-XS/XS.pm",
-           "commands":["/usr/bin/perl", os.path.join(PARSERS_DIR, "test_json_xs.pl")]
+           "commands":["/usr/bin/env", "perl", os.path.join(PARSERS_DIR, "test_json_xs.pl")]
        },
-   "PHP 5.5.36":
+   "Perl6 JSON::Tiny":
        {
            "url":"",
-           "commands":["/usr/bin/php", os.path.join(PARSERS_DIR, "test_json.php")]
+           "commands":["/usr/bin/env", "perl6", os.path.join(PARSERS_DIR, "test_json_tiny.p6")]
        },
-   "Swift Freddy 2.1.0":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_Freddy_2_1_0/bin/test_Freddy_2_1_0")]
-       },
-   "Swift Freddy 20160830":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_Freddy_20160830/bin/test_Freddy")]
-       },
-   "Swift Freddy 20161018":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_Freddy_20161018/bin/test_Freddy")]
-       },
-   "Swift STJSON":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_STJSON/bin/STJSON")]
-       },
-   "Swift Apple JSONSerialization":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test-AppleJSONSerialization/bin/test-AppleJSONSerialization")]
-       },
-   "C jsmn":
-       {
-           "url":"https://github.com/zserge/jsmn",
-           "commands":[os.path.join(PARSERS_DIR, "test_jsmn/bin/test_jsmn")]
-       },
-   "C jansson":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_jansson/bin/test_jansson")]
-       },
-   "C JSON Checker":
-       {
-           "url":"http://www.json.org/JSON_checker/",
-           "commands":[os.path.join(PARSERS_DIR, "test_jsonChecker/bin/jsonChecker")]
-       },
-   "C JSON Checker 2":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_jsonChecker2/bin/jsonChecker2")]
-       },
-   "C ccan":
-       {
-           "url":"",
-           "commands":[os.path.join(PARSERS_DIR, "test_ccan_json/bin/test_ccan")]
-       },
-   "C cJSON":
-       {
-           "url":"https://github.com/DaveGamble/cJSON",
-           "commands":[os.path.join(PARSERS_DIR, "test_cJSON/bin/test-cJSON")]
-       },
-   "C JSON Parser by udp":
-       {
-           "url":"https://github.com/udp/json-parser",
-           "commands":[os.path.join(PARSERS_DIR, "test_json-parser/bin/test_json-parser")]
-       },
-   "Rust json-rust":
-       {
-           "url":"https://github.com/maciejhirsz/json-rust",
-           "commands":[os.path.join(PARSERS_DIR, "test_json-rust/target/debug/tj")]
-       },
-   "Rust rustc_serialize::json":
-       {
-           "url":"https://doc.rust-lang.org/rustc-serialize/rustc_serialize/json/index.html",
-           "commands":[os.path.join(PARSERS_DIR, "test_json-rustc_serialize/rj/target/debug/rj")]
-       },
-   "Java json-simple 1.1.1":
-       {
-           "url":"",
-           "commands":["/usr/bin/java", "-jar", os.path.join(PARSERS_DIR, "test_java_simple_json_1_1_1/TestJSONParsing.jar")]
-       },
-   "Java gson 2.7":
-       {
-           "url":"",
-           "commands":["/usr/bin/java", "-jar", os.path.join(PARSERS_DIR, "test_java_gson_2_7/TestJSONParsing.jar")]
-       },
-   "Java Jackson 2.8.4":
-       {
-           "url":"",
-           "commands":["/usr/bin/java", "-jar", os.path.join(PARSERS_DIR, "test_java_jackson_2_8_4/TestJSONParsing.jar")]
-       },
+
+#   "PHP 5.5.36":
+#       {
+#           "url":"",
+#           "commands":["/usr/bin/php", os.path.join(PARSERS_DIR, "test_json.php")]
+#       },
+#   "Swift Freddy 2.1.0":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_Freddy_2_1_0/bin/test_Freddy_2_1_0")]
+#       },
+#   "Swift Freddy 20160830":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_Freddy_20160830/bin/test_Freddy")]
+#       },
+#   "Swift Freddy 20161018":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_Freddy_20161018/bin/test_Freddy")]
+#       },
+#   "Swift STJSON":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_STJSON/bin/STJSON")]
+#       },
+#   "Swift Apple JSONSerialization":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test-AppleJSONSerialization/bin/test-AppleJSONSerialization")]
+#       },
+#   "C jsmn":
+#       {
+#           "url":"https://github.com/zserge/jsmn",
+#           "commands":[os.path.join(PARSERS_DIR, "test_jsmn/bin/test_jsmn")]
+#       },
+#   "C jansson":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_jansson/bin/test_jansson")]
+#       },
+#   "C JSON Checker":
+#       {
+#           "url":"http://www.json.org/JSON_checker/",
+#           "commands":[os.path.join(PARSERS_DIR, "test_jsonChecker/bin/jsonChecker")]
+#       },
+#   "C JSON Checker 2":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_jsonChecker2/bin/jsonChecker2")]
+#       },
+#   "C ccan":
+#       {
+#           "url":"",
+#           "commands":[os.path.join(PARSERS_DIR, "test_ccan_json/bin/test_ccan")]
+#       },
+#   "C cJSON":
+#       {
+#           "url":"https://github.com/DaveGamble/cJSON",
+#           "commands":[os.path.join(PARSERS_DIR, "test_cJSON/bin/test-cJSON")]
+#       },
+#   "C JSON Parser by udp":
+#       {
+#           "url":"https://github.com/udp/json-parser",
+#           "commands":[os.path.join(PARSERS_DIR, "test_json-parser/bin/test_json-parser")]
+#       },
+#   "Rust json-rust":
+#       {
+#           "url":"https://github.com/maciejhirsz/json-rust",
+#           "commands":[os.path.join(PARSERS_DIR, "test_json-rust/target/debug/tj")]
+#       },
+#   "Rust rustc_serialize::json":
+#       {
+#           "url":"https://doc.rust-lang.org/rustc-serialize/rustc_serialize/json/index.html",
+#           "commands":[os.path.join(PARSERS_DIR, "test_json-rustc_serialize/rj/target/debug/rj")]
+#       },
+#   "Java json-simple 1.1.1":
+#       {
+#           "url":"",
+#           "commands":["/usr/bin/java", "-jar", os.path.join(PARSERS_DIR, "test_java_simple_json_1_1_1/TestJSONParsing.jar")]
+#       },
+#   "Java gson 2.7":
+#       {
+#           "url":"",
+#           "commands":["/usr/bin/java", "-jar", os.path.join(PARSERS_DIR, "test_java_gson_2_7/TestJSONParsing.jar")]
+#       },
+#   "Java Jackson 2.8.4":
+#       {
+#           "url":"",
+#           "commands":["/usr/bin/java", "-jar", os.path.join(PARSERS_DIR, "test_java_jackson_2_8_4/TestJSONParsing.jar")]
+#       },
 }
 
 def run_tests(restrict_to_path=None):
@@ -580,7 +587,8 @@ def generate_report(keep_only_first_result_in_set = False):
         </HTML>
         """)
     
-    os.system("/usr/bin/open %s" % REPORT_PATH)
+    # os.system("/usr/bin/open %s" % REPORT_PATH)
+    print("Report generated at", REPORT_PATH)
 
 ###
 
